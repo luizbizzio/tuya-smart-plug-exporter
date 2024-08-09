@@ -1,4 +1,4 @@
-# Tuya Smart Plug Exporter 📈
+# Tuya Smart Plug Exporter 🔌📈
 
 ## Overview 📊
 
