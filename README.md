@@ -1,16 +1,16 @@
 # Tuya Smart Plug Exporter
 
+## Overview 📊
+
+This script collects and exports key metrics from Tuya smart plugs to Prometheus. It tracks three important data points: <ins>power</ins> , <ins>current</ins>, and <ins>voltage</ins>. This allows you to monitor the performance of your smart plugs with ease.
+
 <div align="center">
    <img src="graphic.png" alt="Graphic" width="500"/>
 </div>
 
-## Overview 📊
-
-This script collects and exports key metrics from Tuya smart plugs to Prometheus. It tracks three important data points: <ins>current</ins> , <ins>power</ins>, and <ins>voltage</ins>. This allows you to monitor the performance of your smart plugs with ease.
-
 ## Features 🌟
 
-- **Metrics Collection:** Retrieves <ins>current</ins>, <ins>power</ins>, and <ins>voltage</ins> data from Tuya smart plugs.
+- **Metrics Collection:** Retrieves <ins>power</ins>, <ins>current</ins>, and <ins>voltage</ins> data from Tuya smart plugs.
   
 - **Prometheus Integration:** Provides metrics in a format compatible with Prometheus scraping.
   
