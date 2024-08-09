@@ -68,7 +68,7 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
    After running the script, you can access the metrics at:
     
      ```init
-     http://localhost:9999
+     http://localhost:9999/metrics
      ```
 
 ## Notes 📝
