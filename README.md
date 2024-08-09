@@ -1,14 +1,12 @@
 # Tuya Smart Plug Exporter
 
-This repository contains a simple Python script designed to monitor Tuya smart plugs and export their metrics to Prometheus. It allows for easy tracking of power consumption data, including current, power, and voltage.
-
 ## Overview 📊
 
-The Tuya Smart Plug Exporter script offers a straightforward solution for exporting Tuya smart plug metrics to Prometheus. It collects crucial data such as current, power, and voltage from your smart plugs and makes it available for Prometheus monitoring with minimal setup.
+This script collects and exports key metrics from Tuya smart plugs to Prometheus. It tracks three important data points: <ins>current</ins> , <ins>power</ins>, and <ins>voltage</ins>. This allows you to monitor the performance of your smart plugs with ease.
 
 ## Features 🌟
 
-- **Metrics Collection:** Retrieves current, power, and voltage data from Tuya smart plugs.
+- **Metrics Collection:** Retrieves <ins>current</ins>, <ins>power</ins>, and <ins>voltage</ins> data from Tuya smart plugs.
   
 - **Prometheus Integration:** Provides metrics in a format compatible with Prometheus scraping.
   
@@ -71,8 +69,8 @@ The Tuya Smart Plug Exporter script offers a straightforward solution for export
 
 ## Notes 📝
 
-- **Automatic Version Detection:** The script automatically tries different versions to ensure connectivity. No manual adjustment is needed for the version.
-
+- **Automatic Version Detection:** The script automatically tries different versions of the Tuya protocol to ensure connectivity. Manual adjustment is not needed for the version.
+  
 - **Configuration:** Ensure that device IPs, IDs, and local keys are correctly configured. You can verify these settings in the configuration section of the script.
 
 ## License
