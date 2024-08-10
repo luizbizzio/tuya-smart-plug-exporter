@@ -10,13 +10,13 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
 
 ## Features 🌟
 
-- **Metrics Collection:** Retrieves <ins>power</ins>, <ins>current</ins>, and <ins>voltage</ins> data from Tuya smart plugs.
-  
-- **Prometheus Integration:** Provides metrics in a format compatible with Prometheus scraping.
-  
-- **Simple Configuration:** Easy to set up with minimal configuration required.
-  
-- **Low CPU Usage:** Designed to be efficient and have a minimal impact on system resources.
+   - **Metrics Collection:** Retrieves <ins>power</ins>, <ins>current</ins>, and <ins>voltage</ins> data from Tuya smart plugs.
+     
+   - **Prometheus Integration:** Provides metrics in a format compatible with Prometheus scraping.
+     
+   - **Simple Configuration:** Easy to set up with minimal configuration required.
+     
+   - **Low CPU Usage:** Designed to be efficient and have a minimal impact on system resources.
 
 ## Configuration ⚙️
 
@@ -31,11 +31,11 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
     LOCAL_KEY = "LOCAL_KEY"
    ```
 
-- `DEVICE_IP`: Local IP address of your Tuya smart plug.
-- `DEVICE_ID`: Unique identifier for your Tuya device.
-- `LOCAL_KEY`: Authentication key for your Tuya device.
-
-  > If you are unsure how to obtain these details, refer to [this tutorial](https://www.youtube.com/watch?v=Q1ZShFJDvE0)
+   - `DEVICE_IP`: Local IP address of your Tuya smart plug.
+   - `DEVICE_ID`: Unique identifier for your Tuya device.
+   - `LOCAL_KEY`: Authentication key for your Tuya device.
+   
+      > If you are unsure how to obtain these details, refer to [this tutorial](https://www.youtube.com/watch?v=Q1ZShFJDvE0)
 
 2. **Exporter Port (Optional):**
 
