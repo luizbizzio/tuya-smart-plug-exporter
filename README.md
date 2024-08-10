@@ -39,7 +39,7 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
 
 2. **Exporter Port (Optional):**
 
-   Set the port for the Prometheus exporter:
+   Set the port for the Prometheus exporter in the script:
 
    ```python
    EXPORTER_PORT = 9999
