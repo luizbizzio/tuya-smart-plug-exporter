@@ -30,14 +30,14 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
     DEVICE_ID = "DEVICE_ID"
     LOCAL_KEY = "LOCAL_KEY"
    ```
-
+   If you are unsure how to obtain these following details, refer to [this tutorial](https://www.youtube.com/watch?v=Q1ZShFJDvE0)
+   
    - `DEVICE_IP`: Local IP address of your Tuya smart plug.
    - `DEVICE_ID`: Unique identifier for your Tuya device.
    - `LOCAL_KEY`: Authentication key for your Tuya device.
-   
-      > If you are unsure how to obtain these details, refer to [this tutorial](https://www.youtube.com/watch?v=Q1ZShFJDvE0)
 
-2. **Exporter Port (Optional):**
+
+3. **Exporter Port (Optional):**
 
    Set the port for the Prometheus exporter in the script:
 
