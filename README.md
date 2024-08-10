@@ -5,7 +5,7 @@
 This script collects and exports key metrics from Tuya smart plugs to Prometheus. It tracks three important data points: <ins>power</ins> , <ins>current</ins>, and <ins>voltage</ins>. This allows you to monitor the performance of your smart plugs with ease.
 
 <div align="center">
-   <img src="metrics.png" alt="Graphic" width="500"/>
+   <img src="metrics.png" alt="Metrics" width="500"/>
 </div>
 
 ## Features 🌟
