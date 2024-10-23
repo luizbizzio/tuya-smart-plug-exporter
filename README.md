@@ -77,8 +77,9 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
   
 - **Configuration:** Ensure that device IPs, IDs, and local keys are correctly configured. You can verify these settings in the configuration section of the script.
 
-## License
-This project is licensed under the MIT License.
+## License 📄
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
 
