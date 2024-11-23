@@ -6,9 +6,18 @@ from prometheus_client import start_http_server
 from prometheus_client.core import GaugeMetricFamily, REGISTRY
 
 # Device Configuration
-DEVICE_IP = "DEVICE_LOCAL_IP"
-DEVICE_ID = "DEVICE_ID"
-LOCAL_KEY = "LOCAL_KEY"
+DEVICE_CONFIGS = [
+    {
+        "ip": "DEVICE_LOCAL_IP_1",
+        "device_id": "DEVICE_ID_1",
+        "local_key": "LOCAL_KEY_1"
+    },
+    {
+        "ip": "DEVICE_LOCAL_IP_2",
+        "device_id": "DEVICE_ID_2",
+        "local_key": "LOCAL_KEY_2"
+    }
+]
 
 # Exporter Port
 EXPORTER_PORT = 9999
@@ -60,9 +69,7 @@ class Collector:
         yield from gauges.values()
 
 def load_config() -> List[DeviceConfig]:
-    return [
-        DeviceConfig(ip=DEVICE_IP, device_id=DEVICE_ID, local_key=LOCAL_KEY)
-    ]
+return [DeviceConfig(**device_config) for device_config in DEVICE_CONFIGS]
 
 @click.command()
 @click.option("--port", help="Port to run the Prometheus exporter on.", default=EXPORTER_PORT)
