@@ -26,9 +26,9 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
 
    ```python
     # Device Configuration
-    DEVICE_IP = "DEVICE_LOCAL_IP"
-    DEVICE_ID = "DEVICE_ID"
-    LOCAL_KEY = "LOCAL_KEY"
+   "ip": "DEVICE_LOCAL_IP",
+   "device_id": "DEVICE_ID",
+   "local_key": "LOCAL_KEY"
    ```
    If you are unsure how to obtain these following details, refer to [this tutorial](https://www.youtube.com/watch?v=Q1ZShFJDvE0)
    
