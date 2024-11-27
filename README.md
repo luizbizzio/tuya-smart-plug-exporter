@@ -80,8 +80,3 @@ This script collects and exports key metrics from Tuya smart plugs to Prometheus
 ## License 📄
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
-
-
-
-
-
