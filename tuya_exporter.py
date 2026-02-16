@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Luiz Bizzio
+# SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+
 from prometheus_client import Gauge, generate_latest, CONTENT_TYPE_LATEST, CollectorRegistry
 from wsgiref.simple_server import make_server
 import tinytuya
@@ -85,3 +88,4 @@ if __name__ == "__main__":
         make_server("", EXPORTER_PORT, metrics_app).serve_forever()
     except KeyboardInterrupt:
         print("Shutting down server.")
+
