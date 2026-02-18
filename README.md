@@ -1,20 +1,21 @@
 # Tuya Smart Plug Exporter (Python)
 
 <p align="center">
-  <img src="images/tuya_logo.png" height="110" style="vertical-align: middle;"/>
-  <img src="images/prometheus_logo.png" height="125" style="vertical-align: middle;"/>
+  <img src="images/tuya_logo.png" height="110"/>
+  <img src="images/prometheus_logo.png" height="125"/>
 </p>
 
 Prometheus exporter for **Tuya-based smart plugs** using **TinyTuya**.
 
 It polls your plugs on your local network and exposes metrics on `/metrics`.  
 It can also **auto-discover** the right DPS keys (voltage, current, power, relay) and scaling, so your `config.yaml` can stay minimal.
+This exporter is read-only. It does not change relay state or control devices.
 
 <p align="center">
   <img src="images/metrics.png" alt="Grafana dashboard" width="500">
 </p>
 
-## Features
+## Features 📊
 
 - Metrics on `/metrics`
 - Multi-device polling with parallel requests
@@ -32,27 +33,62 @@ It can also **auto-discover** the right DPS keys (voltage, current, power, relay
 - Python 3.10+ (3.11 recommended)
 - Network access to your smart plugs (local LAN)
 - Tuya `device_id` and `local_key` for each plug
-- tinytuya, prometheus-client, pyyaml
 
-## Install
+## Install ⚙️
+
+This exporter can be run either directly with **Python** or as a **Docker container**.
+
+---
+
+## Python 🐍
+
+When running directly with Python, the exporter depends on the following libraries:
+**tinytuya**, **prometheus-client**, and **pyyaml**.
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Run
+### Run
 
 ```bash
 python tuya_smart_plug_exporter.py --config.file=config.yaml
 ```
 
-Optional flags:
+---
 
-- `--web.listen-address="0.0.0.0:9999"`
-- `--web.telemetry-path="/metrics"`
-- `--log.level=INFO`
+## Docker 🐳
 
-## Getting device_id and local_key
+The exporter is published as a Docker image on **GitHub Container Registry (GHCR)**.
+
+The container is **stateless by design** and does **not** include any configuration or credentials.
+You must mount your own `config.yaml` file.
+Any change to the configuration requires a container restart.
+
+### Run
+
+Create a `config.yaml` in your current directory, then run:
+
+```bash
+docker run -d \
+  --name tuya-exporter \
+  -p 9999:9999 \
+  -v "$(pwd)/config.yaml:/config/config.yaml:ro" \
+  --restart unless-stopped \
+  ghcr.io/luizbizzio/tuya-smart-plug-exporter:latest
+```
+
+### Test
+
+```bash
+curl http://localhost:9999/metrics
+```
+
+## Configuration 🛠️
+
+### Getting device_id and local_key
 
 To use this exporter you need the Tuya `device_id` and `local_key` for each smart plug.
 
@@ -64,7 +100,7 @@ Notes:
 - Tuya frequently changes their cloud APIs, so the process may break in the future.
 - Once you have the `local_key`, it usually does not change unless you re-pair the device.
 
-## Configuration
+---
 
 Create a `config.yaml` (or JSON). The exporter reads it with `--config.file`.
 
@@ -192,7 +228,7 @@ scrape_configs:
 | `tuya_last_scrape_duration_seconds` | Gauge | Duration of the last poll cycle (all devices) | Global |
 | `tuya_exporter_build_info` | Gauge | Exporter version and Python version | Global |
 
-## Troubleshooting
+## Troubleshooting 🔍
 
 If you get `tuya_up = 1` but `tuya_telemetry_ok = 0` forever:
 
@@ -206,30 +242,17 @@ If `tuya_up = 0`:
 - Try other Tuya protocol versions in `tuya.versions`
 - Check firewall rules and LAN routing
 
-## Docker
+## Security notice ⚠️
 
-### Build
+This exporter requires access to **Tuya local credentials**, specifically:
 
-```bash
-docker build -t tuya-smart-plug-exporter:1.0.0 .
-```
+- `device_id`
+- `local_key`
 
-### Run
+These values allow **local control and telemetry access** to your Tuya devices.
 
-```bash
-docker run -d \
-  --name tuya-exporter \
-  -p 9999:9999 \
-  -v $(pwd)/config:/config:ro \
-  --restart unless-stopped \
-  tuya-smart-plug-exporter:1.0.0
-```
-
-### Test
-
-```bash
-curl http://localhost:9999/metrics
-```
+They are **not passwords**, but they **must be treated as secrets**.
+Do **not** commit your real credentials to GitHub.
 
 ## License
 
