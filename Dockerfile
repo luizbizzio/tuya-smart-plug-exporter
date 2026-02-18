@@ -8,8 +8,11 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY tuya_exporter.py .
+COPY tuya_smart_plug_exporter.py .
 
 EXPOSE 9999
 
-CMD ["python", "tuya_smartplug_exporter.py", "--config.file=/config/config.yaml"]
+VOLUME ["/config"]
+
+ENTRYPOINT ["python", "tuya_smart_plug_exporter.py"]
+CMD ["--config.file=/config/config.yaml"]
