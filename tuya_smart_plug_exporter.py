@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from socketserver import ThreadingMixIn
 from threading import Event, Lock, Thread
 from typing import Any, Dict, List, Optional, Tuple
+from pathlib import Path
 
 import tinytuya
 from prometheus_client import CONTENT_TYPE_LATEST, CollectorRegistry, generate_latest
@@ -987,15 +988,35 @@ def make_app(registry: CollectorRegistry, telemetry_path: str, collector: TuyaCo
 
 def main() -> int:
     p = argparse.ArgumentParser()
-    p.add_argument("--config.file", dest="config_file", required=True)
+    p.add_argument("--config.file", dest="config_file", default=None)
     p.add_argument("--web.listen-address", dest="web_listen_address", default=None)
     p.add_argument("--web.telemetry-path", dest="web_telemetry_path", default=None)
     p.add_argument("--log.level", dest="log_level", default=os.environ.get("LOG_LEVEL", "INFO"))
     args = p.parse_args()
-
+    
     setup_logging(args.log_level)
-
-    cfg = load_config_file(args.config_file)
+    
+    cfg_path = args.config_file or os.environ.get("TUYA_EXPORTER_CONFIG", "").strip() or None
+    
+    if cfg_path is None:
+        candidates = [
+            Path.cwd() / "config.yaml",
+            Path(__file__).resolve().parent / "config.yaml",
+            Path("/config/config.yaml"),
+        ]
+        for c in candidates:
+            if c.is_file():
+                cfg_path = str(c)
+                break
+    
+    if not cfg_path:
+        raise SystemExit(
+            "missing config file: use --config.file=PATH, set TUYA_EXPORTER_CONFIG=PATH, "
+            "or place config.yaml in the current directory, script directory, or /config/config.yaml"
+        )
+    
+    cfg = load_config_file(cfg_path)
+    logging.info("config_file=%s", cfg_path)
 
     web_cfg = cfg.get("web", {}) if isinstance(cfg.get("web", {}), dict) else {}
     scrape_cfg = cfg.get("scrape", {}) if isinstance(cfg.get("scrape", {}), dict) else {}
@@ -1113,3 +1134,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
