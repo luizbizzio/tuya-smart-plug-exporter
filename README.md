@@ -1,8 +1,8 @@
 # Tuya Smart Plug Exporter (Python)
 
 <p align="center">
-  <img src="images/tuya_logo.png" width="120"/>
-  <img src="images/prometheus_logo.png" width="120"/>
+  <img src="images/tuya_logo.png" height="120"/>
+  <img src="images/prometheus_logo.png" height="120"/>
 </p>
 
 Prometheus exporter for **Tuya-based smart plugs** using **TinyTuya**.
