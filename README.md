@@ -1,8 +1,8 @@
 # Tuya Smart Plug Exporter (Python)
 
 <p align="center">
-  <img src="images/tuya_logo.png" height="120"/>
-  <img src="images/prometheus_logo.png" height="120"/>
+  <img src="images/tuya_logo.png" height="110" style="vertical-align: middle;"/>
+  <img src="images/prometheus_logo.png" height="125" style="vertical-align: middle;"/>
 </p>
 
 Prometheus exporter for **Tuya-based smart plugs** using **TinyTuya**.
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 ## Run
 
 ```bash
-python tuya_exporter.py --config.file=config.yaml
+python tuya_smart_plug_exporter.py --config.file=config.yaml
 ```
 
 Optional flags:
@@ -205,6 +205,31 @@ If `tuya_up = 0`:
 - Check IP, device_id, local_key
 - Try other Tuya protocol versions in `tuya.versions`
 - Check firewall rules and LAN routing
+
+## Docker
+
+### Build
+
+```bash
+docker build -t tuya-smart-plug-exporter:1.0.0 .
+```
+
+### Run
+
+```bash
+docker run -d \
+  --name tuya-exporter \
+  -p 9999:9999 \
+  -v $(pwd)/config:/config:ro \
+  --restart unless-stopped \
+  tuya-smart-plug-exporter:1.0.0
+```
+
+### Test
+
+```bash
+curl http://localhost:9999/metrics
+```
 
 ## License
 
