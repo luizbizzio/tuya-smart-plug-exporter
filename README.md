@@ -53,6 +53,16 @@ pip install -r requirements.txt
 
 ### Run
 
+By default, it looks for `config.yaml` in:
+- current directory
+- script directory
+
+```bash
+python tuya_smart_plug_exporter.py
+```
+
+Or explicitly:
+
 ```bash
 python tuya_smart_plug_exporter.py --config.file=config.yaml
 ```
@@ -64,8 +74,11 @@ python tuya_smart_plug_exporter.py --config.file=config.yaml
 The exporter is published as a Docker image on **GitHub Container Registry (GHCR)**.
 
 The container is **stateless by design** and does **not** include any configuration or credentials.
-You must mount your own `config.yaml` file.
+Mount your `config.yaml` to `/config/config.yaml` (default path, auto-detected).
+You can also use `--config.file` or `TUYA_EXPORTER_CONFIG` to point to a different path.
 Any change to the configuration requires a container restart.
+
+
 
 ### Run
 
@@ -235,6 +248,7 @@ If you get `tuya_up = 1` but `tuya_telemetry_ok = 0` forever:
 - Wait a few poll cycles. `samples: 4` means it may need a bit more time.
 - Plug in a device that draws real power (8W+ if you kept `min_power_w: 8.0`).
 - If your plug never exposes voltage/current/power DPS, disable autodiscovery and set `dps` and `scale` manually.
+- If the exporter says missing config, check file name is exactly config.yaml or set `--config.file / TUYA_EXPORTER_CONFIG`.
 
 If `tuya_up = 0`:
 
