@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Luiz Bizzio
+# SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+
 from __future__ import annotations
 
 import argparse
@@ -1134,4 +1137,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
