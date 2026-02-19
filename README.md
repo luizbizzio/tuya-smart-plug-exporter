@@ -1,4 +1,4 @@
-# Tuya Smart Plug Exporter (Python)
+# Tuya Smart Plug Exporter
 
 <p align="center">
   <img src="images/tuya_logo.png" height="110"/>
