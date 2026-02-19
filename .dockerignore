@@ -1,12 +1,8 @@
 .git
-.gitignore
+.github
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.venv/
 venv/
-.env
-config/
+.venv/
+config.yaml
 images/
-README.md
