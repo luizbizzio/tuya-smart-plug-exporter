@@ -1,0 +1,8 @@
+services:
+  tuya-smart-plug-exporter:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "9122:9122"
+    volumes:
+      - ./config:/config:ro
