@@ -1,4 +1,4 @@
-# Tuya Smart Plug Exporter
+<h1 align="center">Tuya Smart Plug Exporter</h1>
 
 <p align="center">
   <img src="images/tuya_logo.png" height="110"/>
