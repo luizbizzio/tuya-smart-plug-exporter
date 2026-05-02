@@ -7,7 +7,6 @@ PYTHON ?= python3
 VENV ?= .venv
 SCRIPT ?= tuya_smart_plug_exporter.py
 CONFIG ?= config.yaml
-CONFIG_DIR ?= ./config
 
 .PHONY: help venv install run docker-build docker-run docker-stop docker-rm docker-logs docker-pull test compose-up compose-down
 
@@ -31,15 +30,16 @@ venv:
 
 install: venv
 	$(VENV)/bin/python -m pip install -U pip
-	$(VENV)/bin/pip install -r requirements.txt
+	$(VENV)/bin/python -m pip install -r requirements.txt
 
-run:
-	$(PYTHON) $(SCRIPT) --config.file=$(CONFIG)
+run: install
+	$(VENV)/bin/python $(SCRIPT) --config.file=$(CONFIG)
 
 docker-build:
 	docker build -t $(IMAGE):latest .
 
 docker-run:
+	test -f $(CONFIG)
 	docker rm -f $(CONTAINER) >/dev/null 2>&1 || true
 	docker run -d \
 	  --name $(CONTAINER) \
