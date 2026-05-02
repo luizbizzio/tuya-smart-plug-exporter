@@ -72,7 +72,6 @@ Download the binary for your system from the latest GitHub Release.
 | 🐧 Linux amd64 | `tuya-smart-plug-exporter-linux-amd64` |
 | 🐧 Linux arm64 | `tuya-smart-plug-exporter-linux-arm64` |
 | 🪟 Windows amd64 | `tuya-smart-plug-exporter-windows-amd64.exe` |
-| 🪟 Windows arm64 | `tuya-smart-plug-exporter-windows-arm64.exe` |
 
 ### Linux arm64 🐧
 
@@ -171,7 +170,7 @@ notepad config.yaml
 docker run -d `
   --name tuya-smart-plug-exporter `
   -p 9122:9122 `
-  -v "${PWD}/config.yaml:/config/config.yaml:ro" `
+  -v "${PWD}\config.yaml:/config/config.yaml:ro" `
   --restart unless-stopped `
   ghcr.io/luizbizzio/tuya-smart-plug-exporter:latest
 ```
