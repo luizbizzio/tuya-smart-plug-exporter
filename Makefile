@@ -33,7 +33,7 @@ install: venv
 	$(VENV)/bin/python -m pip install -r requirements.txt
 
 run: install
-	$(VENV)/bin/python $(SCRIPT) --config.file=$(CONFIG)
+	$(VENV)/bin/python $(SCRIPT) --config-file=$(CONFIG)
 
 docker-build:
 	docker build -t $(IMAGE):latest .
