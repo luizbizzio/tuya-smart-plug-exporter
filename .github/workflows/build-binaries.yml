@@ -36,7 +36,7 @@ jobs:
             -v "$PWD:/src" \
             -w /src \
             python:3.11-slim-bookworm \
-            sh -c "python -m pip install -U pip && python -m pip install -r requirements.txt pyinstaller && pyinstaller --clean --onefile --name tuya-smart-plug-exporter tuya_smart_plug_exporter.py"
+            sh -c "apt-get update && apt-get install -y --no-install-recommends binutils && rm -rf /var/lib/apt/lists/* && python -m pip install -U pip && python -m pip install -r requirements.txt pyinstaller && pyinstaller --clean --onefile --name tuya-smart-plug-exporter tuya_smart_plug_exporter.py"
 
       - run: cp dist/tuya-smart-plug-exporter release/${{ matrix.asset_name }}
 
