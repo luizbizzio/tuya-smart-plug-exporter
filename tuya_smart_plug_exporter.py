@@ -1041,7 +1041,7 @@ def make_app(registry: CollectorRegistry, telemetry_path: str, collector: TuyaCo
 
 def main() -> int:
     p = argparse.ArgumentParser()
-    p.add_argument("--config.file", dest="config_file", default=None)
+    p.add_argument("--config-file", dest="config_file", default=None)
     p.add_argument("--web.listen-address", dest="web_listen_address", default=None)
     p.add_argument("--web.telemetry-path", dest="web_telemetry_path", default=None)
     p.add_argument("--log.level", dest="log_level", default=os.environ.get("LOG_LEVEL", "INFO"))
@@ -1064,7 +1064,7 @@ def main() -> int:
 
     if not cfg_path:
         raise SystemExit(
-            "missing config file: use --config.file=PATH, set TUYA_SMART_PLUG_EXPORTER_CONFIG=PATH, or place config.yaml in the current directory, script directory, or /config/config.yaml"
+            "missing config file: use --config-file=PATH, set TUYA_SMART_PLUG_EXPORTER_CONFIG=PATH, or place config.yaml in the current directory, script directory, or /config/config.yaml"
         )
 
     cfg = load_config_file(cfg_path)
