@@ -88,7 +88,7 @@ chmod +x tuya-smart-plug-exporter-linux-arm64
 cp config.example.yaml config.yaml
 nano config.yaml
 
-./tuya-smart-plug-exporter-linux-arm64 --config.file=config.yaml
+./tuya-smart-plug-exporter-linux-arm64 --config-file=config.yaml
 ```
 
 ### Linux amd64 🐧
@@ -106,7 +106,7 @@ chmod +x tuya-smart-plug-exporter-linux-amd64
 cp config.example.yaml config.yaml
 nano config.yaml
 
-./tuya-smart-plug-exporter-linux-amd64 --config.file=config.yaml
+./tuya-smart-plug-exporter-linux-amd64 --config-file=config.yaml
 ```
 
 ### Windows amd64 🪟
@@ -125,7 +125,7 @@ Invoke-WebRequest -Uri "https://github.com/luizbizzio/tuya-smart-plug-exporter/r
 Copy-Item config.example.yaml config.yaml
 notepad config.yaml
 
-.\tuya-smart-plug-exporter-windows-amd64.exe --config.file=config.yaml
+.\tuya-smart-plug-exporter-windows-amd64.exe --config-file=config.yaml
 ```
 
 ## Option 2: Run with Docker 🐳
@@ -238,10 +238,10 @@ The exporter looks for `config.yaml` in:
 You can also pass it explicitly:
 
 ```bash
-./tuya-smart-plug-exporter-linux-arm64 --config.file=config.yaml
+./tuya-smart-plug-exporter-linux-arm64 --config-file=config.yaml
 ```
 
-JSON is also supported if you pass it explicitly with `--config.file`.
+JSON is also supported if you pass it explicitly with `--config-file`.
 
 ### Minimal config with autodiscovery enabled
 
@@ -372,7 +372,7 @@ If you get `tuya_up = 1` but `tuya_telemetry_ok = 0` forever:
 - Wait a few poll cycles. `samples: 4` means it may need more time.
 - Plug in a device that draws real power.
 - If your plug never exposes voltage, current, or power DPS, disable autodiscovery and set `dps` and `scale` manually.
-- If the exporter says missing config, check that the file is named `config.yaml`, or pass it with `--config.file`.
+- If the exporter says missing config, check that the file is named `config.yaml`, or pass it with `--config-file`.
 
 If `tuya_up = 0`:
 
