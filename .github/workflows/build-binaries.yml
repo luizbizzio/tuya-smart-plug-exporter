@@ -40,8 +40,6 @@ jobs:
 
       - run: cp dist/tuya-smart-plug-exporter release/${{ matrix.asset_name }}
 
-      - run: cd release && sha256sum ${{ matrix.asset_name }} > ${{ matrix.asset_name }}.sha256
-
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.asset_name }}
@@ -67,10 +65,6 @@ jobs:
       - run: New-Item -ItemType Directory -Force -Path release
 
       - run: Copy-Item dist\tuya-smart-plug-exporter.exe release\tuya-smart-plug-exporter-windows-amd64.exe
-
-      - run: |
-          $hash = Get-FileHash release\tuya-smart-plug-exporter-windows-amd64.exe -Algorithm SHA256
-          "$($hash.Hash.ToLower())  tuya-smart-plug-exporter-windows-amd64.exe" | Out-File -Encoding ascii release\tuya-smart-plug-exporter-windows-amd64.exe.sha256
 
       - uses: actions/upload-artifact@v4
         with:
