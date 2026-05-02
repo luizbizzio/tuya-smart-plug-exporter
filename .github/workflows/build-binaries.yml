@@ -45,7 +45,7 @@ jobs:
           name: ${{ matrix.asset_name }}
           path: release/*
 
-  build-windows:
+  build-windows-amd64:
     name: Build tuya-smart-plug-exporter-windows-amd64.exe
     runs-on: windows-2025
 
@@ -55,6 +55,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          architecture: "x64"
 
       - run: python -m pip install -U pip
 
@@ -71,11 +72,39 @@ jobs:
           name: tuya-smart-plug-exporter-windows-amd64
           path: release/*
 
+  build-windows-arm64:
+    name: Build tuya-smart-plug-exporter-windows-arm64.exe
+    runs-on: windows-11-arm
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          architecture: "arm64"
+
+      - run: python -m pip install -U pip
+
+      - run: python -m pip install -r requirements.txt pyinstaller
+
+      - run: pyinstaller --clean --onefile --name tuya-smart-plug-exporter tuya_smart_plug_exporter.py
+
+      - run: New-Item -ItemType Directory -Force -Path release
+
+      - run: Copy-Item dist\tuya-smart-plug-exporter.exe release\tuya-smart-plug-exporter-windows-arm64.exe
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tuya-smart-plug-exporter-windows-arm64
+          path: release/*
+
   release:
     name: Upload release assets
     needs:
       - build-linux
-      - build-windows
+      - build-windows-amd64
+      - build-windows-arm64
     runs-on: ubuntu-24.04
     if: startsWith(github.ref, 'refs/tags/')
 
