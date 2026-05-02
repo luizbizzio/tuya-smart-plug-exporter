@@ -1,8 +1,9 @@
 services:
   tuya-smart-plug-exporter:
-    build: .
+    image: ghcr.io/luizbizzio/tuya-smart-plug-exporter:latest
+    container_name: tuya-smart-plug-exporter
     restart: unless-stopped
     ports:
       - "9122:9122"
     volumes:
-      - ./config:/config:ro
+      - ./config.yaml:/config/config.yaml:ro
