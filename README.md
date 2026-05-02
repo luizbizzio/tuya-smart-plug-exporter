@@ -23,7 +23,6 @@ This exporter is read-only. It does not change relay state or control devices.
 - 🐧 [Linux arm64 binary](#linux-arm64-)
 - 🐧 [Linux amd64 binary](#linux-amd64-)
 - 🪟 [Windows amd64 binary](#windows-amd64-)
-- 🪟 [Windows arm64 binary](#windows-arm64-)
 
 ### 🐳 Docker
 
@@ -128,25 +127,6 @@ Copy-Item config.example.yaml config.yaml
 notepad config.yaml
 
 .\tuya-smart-plug-exporter-windows-amd64.exe --config.file=config.yaml
-```
-
-### Windows arm64 🪟
-
-Use Windows arm64 only for Windows on ARM devices.
-
-Run these commands in PowerShell.
-
-```powershell
-New-Item -ItemType Directory -Force -Path tuya-smart-plug-exporter
-Set-Location tuya-smart-plug-exporter
-
-Invoke-WebRequest -Uri "https://github.com/luizbizzio/tuya-smart-plug-exporter/releases/latest/download/tuya-smart-plug-exporter-windows-arm64.exe" -OutFile "tuya-smart-plug-exporter-windows-arm64.exe"
-Invoke-WebRequest -Uri "https://github.com/luizbizzio/tuya-smart-plug-exporter/releases/latest/download/config.example.yaml" -OutFile "config.example.yaml"
-
-Copy-Item config.example.yaml config.yaml
-notepad config.yaml
-
-.\tuya-smart-plug-exporter-windows-arm64.exe --config.file=config.yaml
 ```
 
 ## Option 2: Run with Docker 🐳
