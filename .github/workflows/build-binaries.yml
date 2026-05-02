@@ -19,24 +19,24 @@ jobs:
       matrix:
         include:
           - runner: ubuntu-24.04
+            platform: linux/amd64
             asset_name: tuya-smart-plug-exporter-linux-amd64
           - runner: ubuntu-24.04-arm
+            platform: linux/arm64
             asset_name: tuya-smart-plug-exporter-linux-arm64
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - run: python -m pip install -U pip
-
-      - run: python -m pip install -r requirements.txt pyinstaller
-
-      - run: pyinstaller --clean --onefile --name tuya-smart-plug-exporter tuya_smart_plug_exporter.py
-
       - run: mkdir -p release
+
+      - run: |
+          docker run --rm \
+            --platform ${{ matrix.platform }} \
+            -v "$PWD:/src" \
+            -w /src \
+            python:3.11-slim-bookworm \
+            sh -c "python -m pip install -U pip && python -m pip install -r requirements.txt pyinstaller && pyinstaller --clean --onefile --name tuya-smart-plug-exporter tuya_smart_plug_exporter.py"
 
       - run: cp dist/tuya-smart-plug-exporter release/${{ matrix.asset_name }}
 
