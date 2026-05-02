@@ -40,8 +40,6 @@ jobs:
 
       - run: cp dist/tuya-smart-plug-exporter release/${{ matrix.asset_name }}
 
-      - run: cp config.example.yaml release/config.example.yaml
-
       - run: cd release && sha256sum ${{ matrix.asset_name }} > ${{ matrix.asset_name }}.sha256
 
       - uses: actions/upload-artifact@v4
@@ -70,8 +68,6 @@ jobs:
 
       - run: Copy-Item dist\tuya-smart-plug-exporter.exe release\tuya-smart-plug-exporter-windows-amd64.exe
 
-      - run: Copy-Item config.example.yaml release\config.example.yaml
-
       - run: |
           $hash = Get-FileHash release\tuya-smart-plug-exporter-windows-amd64.exe -Algorithm SHA256
           "$($hash.Hash.ToLower())  tuya-smart-plug-exporter-windows-amd64.exe" | Out-File -Encoding ascii release\tuya-smart-plug-exporter-windows-amd64.exe.sha256
@@ -89,16 +85,24 @@ jobs:
     runs-on: ubuntu-24.04
     if: startsWith(github.ref, 'refs/tags/')
 
+    permissions:
+      contents: write
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+
     steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/download-artifact@v4
         with:
           path: release-assets
           merge-multiple: true
+
+      - run: cp config.example.yaml release-assets/config.example.yaml
 
       - run: ls -la release-assets
 
       - run: gh release view "${GITHUB_REF_NAME}" || gh release create "${GITHUB_REF_NAME}" --generate-notes
 
       - run: gh release upload "${GITHUB_REF_NAME}" release-assets/* --clobber
-        env:
-          GH_TOKEN: ${{ github.token }}
